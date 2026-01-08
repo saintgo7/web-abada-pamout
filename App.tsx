@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import ToolCard from './components/ToolCard';
 import ChatWindow from './components/ChatWindow';
+import { PPMSQuickOverview } from './components/ppms/PPMSQuickOverview';
 import { TOOLS, MOCK_CHART_DATA } from './constants';
 import { translations } from './translations';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -43,9 +44,9 @@ const App: React.FC = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
               {TOOLS.map((tool) => (
-                <ToolCard 
-                  key={tool.id} 
-                  tool={tool} 
+                <ToolCard
+                  key={tool.id}
+                  tool={tool}
                   active={activeToolId === tool.id}
                   onClick={setActiveToolId}
                   lang={lang}
@@ -53,6 +54,9 @@ const App: React.FC = () => {
               ))}
             </div>
           </section>
+
+          {/* PPMS Quick Overview */}
+          <PPMSQuickOverview lang={lang} isDarkMode={isDarkMode} />
 
           <section className="bg-white dark:bg-white/5 border border-slate-200 dark:border-slate-800/50 rounded-2xl p-6 shadow-sm">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-4 flex items-center">

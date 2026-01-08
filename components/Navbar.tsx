@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { translations } from '../translations';
 import Logo from './Logo';
 
@@ -23,7 +24,8 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, lang, toggleLa
         <div className="hidden lg:block h-6 w-px bg-slate-200 dark:bg-slate-800"></div>
         
         <div className="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-500 dark:text-slate-400">
-          <a href="#/" className="hover:text-indigo-600 dark:hover:text-white transition-colors">{t.workspace}</a>
+          <Link to="/" className="hover:text-indigo-600 dark:hover:text-white transition-colors">{t.workspace}</Link>
+          <Link to="/ppms" className="hover:text-indigo-600 dark:hover:text-white transition-colors">{t.portfolio}</Link>
           <a href="#/solutions" className="hover:text-indigo-600 dark:hover:text-white transition-colors">{t.solutions}</a>
           <a href="#/analytics" className="hover:text-indigo-600 dark:hover:text-white transition-colors">{t.analytics}</a>
           <a href="#/about" className="hover:text-indigo-600 dark:hover:text-white transition-colors">{t.company}</a>
