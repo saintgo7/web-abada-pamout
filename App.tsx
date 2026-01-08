@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import ToolCard from './components/ToolCard';
 import ChatWindow from './components/ChatWindow';
 import { PPMSQuickOverview } from './components/ppms/PPMSQuickOverview';
+import { PPMSAlerts } from './components/ppms/PPMSAlerts';
 import { TOOLS, MOCK_CHART_DATA } from './constants';
 import { translations } from './translations';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -57,6 +58,9 @@ const App: React.FC = () => {
 
           {/* PPMS Quick Overview */}
           <PPMSQuickOverview lang={lang} isDarkMode={isDarkMode} />
+
+          {/* PPMS Alerts */}
+          <PPMSAlerts lang={lang} isDarkMode={isDarkMode} maxAlerts={3} />
 
           <section className="bg-white dark:bg-white/5 border border-slate-200 dark:border-slate-800/50 rounded-2xl p-6 shadow-sm">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-4 flex items-center">

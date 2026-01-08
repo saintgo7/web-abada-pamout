@@ -4,6 +4,7 @@ import { Message } from '../types';
 import { getGeminiResponse } from '../services/geminiService';
 import { translations } from '../translations';
 import { GoogleGenAI } from "@google/genai";
+import { usePPMSStore } from '../stores/ppmsStore';
 
 interface ChatWindowProps {
   activeToolId: string;
@@ -57,9 +58,36 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ activeToolId, lang }) => {
     setIsTyping(true);
 
     try {
-      const toolContext = `Acting as the "${activeToolId}" tool on PamOut.com. Preferred language: ${lang}.`;
+      let toolContext = `Acting as the "${activeToolId}" tool on PamOut.com. Preferred language: ${lang}.`;
+
+      // Add PPMS context if PPMS Assistant is selected
+      if (activeToolId === 'ppms-assistant') {
+        const programs = usePPMSStore.getState().programs;
+        const projects = usePPMSStore.getState().projects;
+        const resources = usePPMSStore.getState().resources;
+
+        const activePrograms = programs.filter(p => p.status === 'active');
+        const totalBudget = programs.reduce((sum, p) => sum + p.budget, 0);
+        const totalSpent = programs.reduce((sum, p) => sum + p.spent, 0);
+
+        toolContext += `
+
+Current PPMS Data:
+- Total Programs: ${programs.length}
+- Active Programs: ${activePrograms.length}
+- Total Projects: ${projects.length}
+- Total Resources: ${resources.length}
+- Total Budget: $${(totalBudget / 1000).toFixed(0)}K
+- Budget Spent: $${(totalSpent / 1000).toFixed(0)}K (${totalBudget > 0 ? ((totalSpent / totalBudget) * 100).toFixed(1) : 0}%)
+
+Programs:
+${programs.map(p => `- ${p.name} (${p.status}): ${p.progress.toFixed(0)}% complete, $${(p.spent / 1000).toFixed(0)}K / $${(p.budget / 1000).toFixed(0)}K`).join('\n')}
+
+When answering about programs, projects, or resources, reference this data.`;
+      }
+
       const response = await getGeminiResponse(input, `You are PamOut by ABADA Inc. ${toolContext} Provide professional, highly detailed, and accurate responses. Respond in the requested language (${lang}). Do not use emojis.`);
-      
+
       const assistantMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',

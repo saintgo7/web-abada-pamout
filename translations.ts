@@ -114,6 +114,10 @@ export const translations = {
         name: "Solution Architect",
         desc: "Automated RFP and technical specification design for outsourcing projects."
       },
+      ppmsAssistant: {
+        name: "PPMS Assistant",
+        desc: "Get insights about your programs, projects, and resource allocation."
+      },
       analyst: {
         name: "Tech Estimator",
         desc: "Analyze project complexity and provide precise development cost estimations."
@@ -245,6 +249,10 @@ export const translations = {
       writer: {
         name: "솔루션 아키텍트",
         desc: "외주 프로젝트를 위한 자동화된 제안서(RFP) 및 기술 명세서를 설계합니다."
+      },
+      ppmsAssistant: {
+        name: "PPMS 어시스턴트",
+        desc: "프로그램, 프로젝트 및 리소스 할당에 대한 인사이트를 제공합니다."
       },
       analyst: {
         name: "기술 견적기",
