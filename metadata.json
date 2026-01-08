@@ -1,0 +1,8 @@
+{
+  "name": "Copy of PamOut by ABADA Inc.",
+  "description": "An enterprise-grade AI productivity workspace featuring advanced reasoning, data visualization, and generative tools powered by ABADA Inc.'s proprietary integration of Gemini 3 Pro.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
